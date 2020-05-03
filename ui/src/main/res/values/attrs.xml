@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ToolBarLayout">
+        <attr name="highlight" format="boolean"/>
+        <attr name="toolBarHeightView">
+            <enum name="visible" value="0"/>
+            <enum name="gone" value="8"/>
+        </attr>
+        <attr name="leftString" format="string"/>
+        <attr name="centerString" format="string"/>
+        <attr name="rightString" format="string"/>
+        <attr name="leftIcon" format="reference"/>
+        <attr name="rightIcon" format="reference"/>
+    </declare-styleable>
+</resources>

@@ -9,6 +9,6 @@ ext {
     ]
 
     dependConfig = [
-            glide                : 28
+            glide                : "4.11.0"
     ]
 }

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             if (num > 0){
                 ToastUtil.toastShort("有"+num+"项权限未授予，部分功能无法使用！");
             }else {
-                ToastUtil.toastShort("授权成功！");
+                //ToastUtil.toastShort("授权成功！");
             }
         }
     }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7">
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/message_input_emoji"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/message_input_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="30dp"
+            android:minHeight="30dp"
+            android:src="@drawable/message_input_audio" />
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/message_input_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/message_input_edit"
+            android:maxHeight="120dp"
+            android:minHeight="30dp"
+            android:padding="5dp" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/message_input_audio_input"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="35dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/message_input_audio_button"
+            android:text="按住说话"
+            android:textColor="#696969"/>
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/message_input_face"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="30dp"
+            android:minHeight="30dp"
+            android:src="@drawable/message_input_face" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/message_input_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="30dp"
+            android:minHeight="30dp"
+            android:src="@drawable/message_input_more" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/message_input_send"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:background="@drawable/message_input_send"
+            android:text="发送"
+            android:textColor="#fff"
+            android:textSize="13sp"/>
+    </LinearLayout>
+
+    <!---->
+    <RelativeLayout
+        android:id="@+id/message_input_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+</LinearLayout>
