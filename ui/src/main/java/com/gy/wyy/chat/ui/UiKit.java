@@ -2,6 +2,8 @@ package com.gy.wyy.chat.ui;
 
 import android.content.Context;
 
+import com.gy.wyy.chat.ui.tool.FileUtil;
+
 /**
  *
  */
@@ -15,6 +17,7 @@ public class UiKit {
      */
     public static void initKit(Context context){
         mAppContext = context;
+        FileUtil.initPath();
     }
 
     /**
