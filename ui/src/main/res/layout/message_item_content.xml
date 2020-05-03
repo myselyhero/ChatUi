@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/message_item_content_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="13.33dp"
+        android:background="@drawable/message_empty_time_background"
+        android:paddingLeft="5dp"
+        android:paddingTop="4dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="4dp"
+        android:textColor="#fff"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/message_item_content_left_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5.5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/message_item_content_time"
+        android:src="@drawable/default_profile"/>
+
+    <ImageView
+        android:id="@+id/message_item_content_right_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="3dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/message_item_content_time"
+        android:src="@drawable/default_profile"/>
+
+    <TextView
+        android:id="@+id/message_item_content_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message_item_content_time"
+        android:layout_toLeftOf="@id/message_item_content_right_icon"
+        android:layout_toRightOf="@id/message_item_content_left_icon"
+        android:textColor="#606060"
+        android:layout_marginLeft="5dp"
+        android:textSize="12sp"/>
+
+    <LinearLayout
+        android:id="@+id/msg_content_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message_item_content_time"
+        android:layout_marginTop="2dp"
+        android:layout_toLeftOf="@id/message_item_content_right_icon"
+        android:layout_toRightOf="@id/message_item_content_left_icon"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/message_item_content_progress"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="5dp"/>
+
+        <ImageView
+            android:id="@+id/message_item_content_status"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="5dp"
+            android:src="@drawable/message_send_fail"/>
+        <FrameLayout
+            android:id="@+id/message_item_content_fl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

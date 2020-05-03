@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/message_item_text_tv"
+        android:padding="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="就看不见SD卡北京市打卡金卡戴珊把借口打沙包交肯定是是电脑克里斯蒂娜"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="3dp"
+        android:textColor="@color/message_text_black"
+        android:maxWidth="230dp"
+        android:textSize="15sp" />
+</LinearLayout>
+
