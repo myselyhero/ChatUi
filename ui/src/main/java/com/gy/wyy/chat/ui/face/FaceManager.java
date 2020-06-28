@@ -9,6 +9,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.LruCache;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -60,7 +61,6 @@ public class FaceManager {
             options.inDensity = DisplayMetrics.DENSITY_XXHIGH;
             options.inScreenDensity = resources.getDisplayMetrics().densityDpi;
             options.inTargetDensity = resources.getDisplayMetrics().densityDpi;
-            UiKit.getAppContext().getAssets().list("");
             is = UiKit.getAppContext().getAssets().open(assetPath);
             Bitmap bitmap = BitmapFactory.decodeStream(is, new Rect(0, 0, drawableWidth, drawableWidth), options);
             if (bitmap != null) {
@@ -70,7 +70,6 @@ public class FaceManager {
                 if (isEmoji) {
                     emojiList.add(emoji);
                 }
-
             }
             return emoji;
         } catch (Exception e) {

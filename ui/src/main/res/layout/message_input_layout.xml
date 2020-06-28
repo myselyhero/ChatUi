@@ -36,19 +36,6 @@
             android:minHeight="30dp"
             android:padding="5dp" />
 
-        <Button
-            android:visibility="gone"
-            android:id="@+id/message_input_audio_input"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="35dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/message_input_audio_button"
-            android:text="按住说话"
-            android:textColor="#696969"/>
-
         <ImageView
             android:layout_margin="5dp"
             android:id="@+id/message_input_face"

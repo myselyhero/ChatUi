@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  *
  */
-public class InputMoreAdapter extends RecyclerView.Adapter<InputMoreAdapter.InputMoreViewHolder> {
+public class InputMoreAdapter extends BaseAdapter {
 
     public Context context;
     private List<InputMoreEntity> dataSource = new ArrayList<>();
@@ -28,23 +29,39 @@ public class InputMoreAdapter extends RecyclerView.Adapter<InputMoreAdapter.Inpu
         this.context = context;
     }
 
-    @NonNull
     @Override
-    public InputMoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.input_more_layout,parent,false);
-        return new InputMoreViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull InputMoreViewHolder holder, int position) {
-        InputMoreEntity entity = dataSource.get(position);
-        GlideEngine.loaderCircle(entity.getResourceId(),holder.imageView,10);
-        holder.textView.setText(entity.getTitle());
-    }
-
-    @Override
-    public int getItemCount() {
+    public int getCount() {
         return dataSource.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return dataSource.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        InputMoreViewHolder viewHolder;
+        if (convertView == null){
+            convertView = LayoutInflater.from(context).inflate(R.layout.input_more_grid_item,parent,false);
+            viewHolder = new InputMoreViewHolder();
+            viewHolder.textView = convertView.findViewById(R.id.input_more_grid_tv);
+            viewHolder.imageView = convertView.findViewById(R.id.input_more_grid_iv);
+            convertView.setTag(viewHolder);
+        }else {
+            viewHolder = (InputMoreViewHolder) convertView.getTag();
+        }
+
+        InputMoreEntity entity = dataSource.get(position);
+        GlideEngine.loaderCircle(entity.getResourceId(),viewHolder.imageView,10);
+        viewHolder.textView.setText(entity.getTitle());
+
+        return convertView;
     }
 
     /**
@@ -63,15 +80,9 @@ public class InputMoreAdapter extends RecyclerView.Adapter<InputMoreAdapter.Inpu
     /**
      *
      */
-    public class InputMoreViewHolder extends RecyclerView.ViewHolder {
+    public class InputMoreViewHolder {
 
         TextView textView;
         ImageView imageView;
-
-        public InputMoreViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textView = itemView.findViewById(R.id.input_more_tv);
-            imageView = itemView.findViewById(R.id.input_more_iv);
-        }
     }
 }

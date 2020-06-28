@@ -1,6 +1,5 @@
 package com.gy.wyy.chat.ui;
 
-import com.gy.wyy.chat.ui.adapter.MessageAdapter;
 import com.gy.wyy.chat.ui.model.MessagePropertiesInterface;
 import com.gy.wyy.chat.ui.model.OnMessageLayoutItemClickListener;
 

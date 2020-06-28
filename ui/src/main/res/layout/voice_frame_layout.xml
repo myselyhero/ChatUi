@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:orientation="vertical"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/voice_frame_tips"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:text="@string/voice_normal"/>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/voice_frame_cancel"
+            android:background="@drawable/voice_button_black"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_voice_delete_black"/>
+
+        <Button
+            android:id="@+id/voice_frame_start"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/ic_voice_start_white"/>
+
+        <ImageView
+            android:id="@+id/voice_frame_translate"
+            android:background="@drawable/voice_button_black"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_voice_cn_black"/>
+    </LinearLayout>
+</LinearLayout>

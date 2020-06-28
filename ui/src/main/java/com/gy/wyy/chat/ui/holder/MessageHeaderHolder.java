@@ -5,7 +5,7 @@ import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gy.wyy.chat.ui.entity.MessageEntity;
+import com.gy.wyy.chat.ui.MessageEntity;
 
 /**
  * 头部加载

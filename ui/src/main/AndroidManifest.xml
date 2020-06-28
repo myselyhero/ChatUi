@@ -14,9 +14,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
 
-    <application>
-
-    </application>
+    <application></application>
 
     <!-- 访问网络-->
     <uses-permission android:name="android.permission.INTERNET" />

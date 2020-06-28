@@ -2,7 +2,7 @@ package com.gy.wyy.chat.ui.model;
 
 import android.view.View;
 
-import com.gy.wyy.chat.ui.entity.MessageEntity;
+import com.gy.wyy.chat.ui.MessageEntity;
 
 /**
  *

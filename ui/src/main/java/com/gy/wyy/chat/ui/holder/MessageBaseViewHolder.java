@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gy.wyy.chat.ui.MessageProperties;
-import com.gy.wyy.chat.ui.adapter.MessageAdapter;
-import com.gy.wyy.chat.ui.entity.MessageEntity;
+import com.gy.wyy.chat.ui.MessageAdapter;
+import com.gy.wyy.chat.ui.MessageEntity;
 import com.gy.wyy.chat.ui.model.OnMessageLayoutItemClickListener;
 
 /**

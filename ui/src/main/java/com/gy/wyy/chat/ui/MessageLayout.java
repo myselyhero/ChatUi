@@ -1,7 +1,6 @@
 package com.gy.wyy.chat.ui;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,8 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gy.wyy.chat.ui.adapter.MessageAdapter;
-import com.gy.wyy.chat.ui.entity.MessageEntity;
 import com.gy.wyy.chat.ui.model.OnMessageLayoutItemClickListener;
 
 /**
