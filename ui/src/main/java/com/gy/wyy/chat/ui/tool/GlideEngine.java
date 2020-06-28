@@ -63,4 +63,19 @@ public class GlideEngine {
                         .bitmapTransform(new CornerTransform(UiKit.getAppContext(),size)))
                 .into(imageView);
     }
+
+    /**
+     *
+     * @param url
+     * @param imageView
+     */
+    public static void loader(String url, final ImageView imageView){
+        Glide.with(UiKit.getAppContext())
+                .load(url)
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.default_image)
+                        .error(R.drawable.default_error)
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
+                .into(imageView);
+    }
 }

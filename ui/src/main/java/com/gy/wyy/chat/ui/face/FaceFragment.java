@@ -19,8 +19,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.gy.wyy.chat.ui.R;
 import com.gy.wyy.chat.ui.tool.ScreenUtil;
+import com.gy.wyy.chat.ui.tool.SoftKeyBoardUtil;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,17 +30,15 @@ import java.util.List;
  */
 public class FaceFragment extends Fragment {
 
-    ViewPager faceViewPager;
-    EmojiIndicatorView faceIndicator;
+    private ArrayList<Emoji> emojiList;
+    private OnEmojiClickListener listener;
+
     ArrayList<View> ViewPagerItems = new ArrayList<>();
-    ArrayList<Emoji> emojiList;
-    ArrayList<Emoji> recentlyEmojiList;
-    private int mCurrentGroupIndex = 0;
+    private ViewPager viewPager;
+    private EmojiIndicatorView emojiIndicatorView;
     private int columns = 7;
     private int rows = 3;
-    private int vMargin = 0;
-    private OnEmojiClickListener listener;
-    private RecentEmojiManager recentManager;
+    //private int vMargin = 0;
 
     public void setListener(OnEmojiClickListener listener) {
         this.listener = listener;
@@ -51,55 +49,52 @@ public class FaceFragment extends Fragment {
         if (activity instanceof OnEmojiClickListener) {
             this.listener = (OnEmojiClickListener) activity;
         }
-        recentManager = RecentEmojiManager.make(activity);
         super.onAttach(activity);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        emojiList = FaceManager.getEmojiList();
-        try {
-            if (recentManager.getCollection(RecentEmojiManager.PREFERENCE_NAME) != null) {
-                recentlyEmojiList = (ArrayList<Emoji>) recentManager.getCollection(RecentEmojiManager.PREFERENCE_NAME);
-            } else {
-                recentlyEmojiList = new ArrayList<>();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         super.onCreate(savedInstanceState);
+        emojiList = FaceManager.getEmojiList();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.input_face_fragment, container, false);
-        ViewGroup.LayoutParams params = view.getLayoutParams();
+        /*ViewGroup.LayoutParams params = view.getLayoutParams();
         params.height = FaceUtil.getSoftKeyBoardHeight();
-        view.setLayoutParams(params);
-        faceViewPager = view.findViewById(R.id.face_viewPager);
-        faceIndicator = view.findViewById(R.id.face_indicator);
-        initViewPager(emojiList, 7, 3);
+        view.setLayoutParams(params);*/
+        viewPager = view.findViewById(R.id.input_face_fragment_view_pager);
+        emojiIndicatorView = view.findViewById(R.id.input_face_fragment_index);
+        initViewPager();
         return view;
     }
 
-    private void initViewPager(ArrayList<Emoji> list, int columns, int rows) {
-        this.columns = columns;
-        this.rows = rows;
-        if (list.size() > 0) {
-            vMargin = (FaceUtil.getSoftKeyBoardHeight() - (ScreenUtil.getPxByDp(40 + 20) + list.get(0).getHeight() * rows)) / 4;
-        }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 
-        intiIndicator(list);
+    /**
+     *
+     */
+    private void initViewPager() {
+        if (emojiList == null){
+            return;
+        }
+        /*if (emojiList.size() > 0) {
+            vMargin = (SoftKeyBoardUtil.getSoftKeyBoardHeight() - (ScreenUtil.getPxByDp(40 + 20) + emojiList.get(0).getHeight() * rows)) / 5;
+        }*/
+
+        emojiIndicatorView.init(getPagerCount(emojiList));
         ViewPagerItems.clear();
-        int pageCont = getPagerCount(list);
+        int pageCont = getPagerCount(emojiList);
         for (int i = 0; i < pageCont; i++) {
-            ViewPagerItems.add(getViewPagerItem(i, list));
+            ViewPagerItems.add(getViewPagerItem(i, emojiList));
         }
         FaceVPAdapter mVpAdapter = new FaceVPAdapter(ViewPagerItems);
-        faceViewPager.setAdapter(mVpAdapter);
-        faceViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.setAdapter(mVpAdapter);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             int oldPosition = 0;
 
             @Override
@@ -109,7 +104,7 @@ public class FaceFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                faceIndicator.playBy(oldPosition, position);
+                emojiIndicatorView.playBy(oldPosition, position);
                 oldPosition = position;
             }
 
@@ -120,10 +115,6 @@ public class FaceFragment extends Fragment {
         });
     }
 
-    private void intiIndicator(ArrayList<Emoji> list) {
-        faceIndicator.init(getPagerCount(list));
-    }
-
     /**
      * 根据表情数量以及GridView设置的行数和列数计算Pager数量
      *
@@ -132,8 +123,6 @@ public class FaceFragment extends Fragment {
     private int getPagerCount(ArrayList<Emoji> list) {
         int count = list.size();
         int dit = 1;
-        if (mCurrentGroupIndex > 0)
-            dit = 0;
         return count % (columns * rows - dit) == 0 ? count / (columns * rows - dit)
                 : count / (columns * rows - dit) + 1;
     }
@@ -146,27 +135,25 @@ public class FaceFragment extends Fragment {
          * 注：因为每一页末尾都有一个删除图标，所以每一页的实际表情columns *　rows　－　1; 空出最后一个位置给删除图标
          * */
         final List<Emoji> subList = new ArrayList<>();
-        int dit = 1;
-        if (mCurrentGroupIndex > 0)
-            dit = 0;
+        int dit = 1;;
         subList.addAll(list.subList(position * (columns * rows - dit),
                 (columns * rows - dit) * (position + 1) > list
                         .size() ? list.size() : (columns
                         * rows - dit)
                         * (position + 1)));
+
         /**
          * 末尾添加删除图标
          * */
-        if (mCurrentGroupIndex == 0 && subList.size() < (columns * rows - dit)) {
+        if (subList.size() < (columns * rows - dit)) {
             for (int i = subList.size(); i < (columns * rows - dit); i++) {
                 subList.add(null);
             }
         }
-        if (mCurrentGroupIndex == 0) {
-            Emoji deleteEmoji = new Emoji();
-            deleteEmoji.setIcon(BitmapFactory.decodeResource(getResources(), R.drawable.face_delete));
-            subList.add(deleteEmoji);
-        }
+
+        Emoji deleteEmoji = new Emoji();
+        deleteEmoji.setIcon(BitmapFactory.decodeResource(getResources(), R.drawable.input_face_delete));
+        subList.add(deleteEmoji);
 
 
         FaceGVAdapter mGvAdapter = new FaceGVAdapter(subList, getActivity());
@@ -191,23 +178,54 @@ public class FaceFragment extends Fragment {
         return gridview;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        try {
-            recentManager.putCollection(RecentEmojiManager.PREFERENCE_NAME, recentlyEmojiList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
+    /**
+     *
+     */
     public interface OnEmojiClickListener {
+
         void onEmojiDelete();
 
         void onEmojiClick(Emoji emoji);
     }
 
+    /**
+     * viewpager适配器
+     */
+    class FaceVPAdapter extends PagerAdapter {
+        // 界面列表
+        private List<View> views;
+
+        public FaceVPAdapter(List<View> views) {
+            this.views = views;
+        }
+
+        @Override
+        public void destroyItem(View arg0, int arg1, Object arg2) {
+            ((ViewPager) arg0).removeView((View) (arg2));
+        }
+
+        @Override
+        public int getCount() {
+            return views.size();
+        }
+
+        // 初始化arg1位置的界面
+        @Override
+        public Object instantiateItem(View arg0, int arg1) {
+            ((ViewPager) arg0).addView(views.get(arg1));
+            return views.get(arg1);
+        }
+
+        // 判断是否由对象生成界
+        @Override
+        public boolean isViewFromObject(View arg0, Object arg1) {
+            return (arg0 == arg1);
+        }
+    }
+
+    /**
+     * 表情适配器
+     */
     class FaceGVAdapter extends BaseAdapter {
         private List<Emoji> list;
         private Context mContext;
@@ -250,7 +268,7 @@ public class FaceFragment extends Fragment {
                     params.width = emoji.getWidth();
                     params.height = emoji.getHeight();
                 }
-                if (position / columns == 0) {
+                /*if (position / columns == 0) {
                     params.setMargins(0, vMargin, 0, 0);
                 } else if (rows == 2) {
                     params.setMargins(0, vMargin, 0, 0);
@@ -260,7 +278,7 @@ public class FaceFragment extends Fragment {
                     } else {
                         params.setMargins(0, 0, 0, vMargin);
                     }
-                }
+                }*/
 
                 holder.iv.setLayoutParams(params);
                 convertView.setTag(holder);
@@ -276,38 +294,6 @@ public class FaceFragment extends Fragment {
 
         class ViewHolder {
             ImageView iv;
-        }
-    }
-
-    class FaceVPAdapter extends PagerAdapter {
-        // 界面列表
-        private List<View> views;
-
-        public FaceVPAdapter(List<View> views) {
-            this.views = views;
-        }
-
-        @Override
-        public void destroyItem(View arg0, int arg1, Object arg2) {
-            ((ViewPager) arg0).removeView((View) (arg2));
-        }
-
-        @Override
-        public int getCount() {
-            return views.size();
-        }
-
-        // 初始化arg1位置的界面
-        @Override
-        public Object instantiateItem(View arg0, int arg1) {
-            ((ViewPager) arg0).addView(views.get(arg1));
-            return views.get(arg1);
-        }
-
-        // 判断是否由对象生成界
-        @Override
-        public boolean isViewFromObject(View arg0, Object arg1) {
-            return (arg0 == arg1);
         }
     }
 }

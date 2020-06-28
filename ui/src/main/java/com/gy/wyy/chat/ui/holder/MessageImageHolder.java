@@ -18,7 +18,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.gy.wyy.chat.ui.R;
-import com.gy.wyy.chat.ui.entity.MessageEntity;
+import com.gy.wyy.chat.ui.MessageEntity;
 import com.gy.wyy.chat.ui.tool.GlideEngine;
 
 /**

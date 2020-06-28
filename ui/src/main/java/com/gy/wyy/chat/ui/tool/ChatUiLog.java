@@ -19,8 +19,8 @@ public class ChatUiLog {
      * @param strTag  TAG
      * @param strInfo 消息
      */
-    public static void v(String strTag, String strInfo) {
-        Log.v(mixTag(strTag), strInfo);
+    public static void v(String strTag, Object strInfo) {
+        Log.v(mixTag(strTag), strInfo.toString());
     }
 
     /**
@@ -29,8 +29,8 @@ public class ChatUiLog {
      * @param strTag  TAG
      * @param strInfo 消息
      */
-    public static void d(String strTag, String strInfo) {
-        Log.d(mixTag(strTag), strInfo);
+    public static void d(String strTag, Object strInfo) {
+        Log.d(mixTag(strTag), strInfo.toString());
     }
 
     /**
@@ -39,8 +39,8 @@ public class ChatUiLog {
      * @param strTag  TAG
      * @param strInfo 消息
      */
-    public static void i(String strTag, String strInfo) {
-        Log.i(mixTag(strTag), strInfo);
+    public static void i(String strTag, Object strInfo) {
+        Log.i(mixTag(strTag), strInfo.toString());
     }
 
     /**
@@ -49,8 +49,8 @@ public class ChatUiLog {
      * @param strTag  TAG
      * @param strInfo 消息
      */
-    public static void w(String strTag, String strInfo) {
-        Log.w(mixTag(strTag), strInfo);
+    public static void w(String strTag, Object strInfo) {
+        Log.w(mixTag(strTag), strInfo.toString());
     }
 
     /**
@@ -59,7 +59,7 @@ public class ChatUiLog {
      * @param strTag  TAG
      * @param strInfo 消息
      */
-    public static void w(String strTag, String strInfo, Throwable e) {
+    public static void w(String strTag, Object strInfo, Throwable e) {
         Log.w(mixTag(strTag), strInfo + e.getMessage());
     }
 
@@ -69,7 +69,7 @@ public class ChatUiLog {
      * @param strTag  TAG
      * @param strInfo 消息
      */
-    public static void e(String strTag, String strInfo) {
-        Log.e(mixTag(strTag), strInfo);
+    public static void e(String strTag, Object strInfo) {
+        Log.e(mixTag(strTag), strInfo.toString());
     }
 }

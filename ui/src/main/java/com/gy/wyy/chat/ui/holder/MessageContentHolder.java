@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.gy.wyy.chat.ui.R;
-import com.gy.wyy.chat.ui.entity.MessageEntity;
+import com.gy.wyy.chat.ui.MessageEntity;
 import com.gy.wyy.chat.ui.tool.DateTimeUtil;
 import com.gy.wyy.chat.ui.tool.GlideEngine;
 

@@ -13,11 +13,12 @@ import java.io.ObjectOutputStream;
 import java.util.Collection;
 
 
-//SharedPerferences工具
-
+/**
+ *  SharedPerferences工具
+ */
 public class RecentEmojiManager {
 
-    public static final String PREFERENCE_NAME = "recentFace";//"preference";
+    public static final String PREFERENCE_NAME = "recentFace";
 
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Ui</string>
+
+    <!--语音-->
+    <string name="voice_normal">按下说话</string>
+    <string name="voice_pressed">松开结束</string>
+    <string name="voice_cancel">松开取消</string>
+    <string name="voice_translate">松开转文字</string>
 </resources>

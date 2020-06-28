@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gy.wyy.chat.ui.R;
-import com.gy.wyy.chat.ui.entity.MessageEntity;
+import com.gy.wyy.chat.ui.MessageEntity;
 
 /**
  *

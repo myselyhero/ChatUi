@@ -2,7 +2,7 @@ package com.gy.wyy.chat.ui.face;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +45,9 @@ public class EmojiFragment extends Fragment {
      * @param matching
      */
     public void emojiMatching(String matching){
-        Log.e(EmojiFragment.class.getSimpleName(), "emojiMatching: "+matching);
+        if (TextUtils.isEmpty(matching))
+            return;
+
         for (int i = 0; i < 10; i++) {
             dataSource.add("http://pic2.zhimg.com/50/v2-6f7ecca94b20af97d1716bfd332fbaf6_hd.jpg");
         }
