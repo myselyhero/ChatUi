@@ -29,8 +29,6 @@ import com.gy.wyy.chat.ui.face.EmojiFragment;
 import com.gy.wyy.chat.ui.face.FaceFragment;
 import com.gy.wyy.chat.ui.face.FaceManager;
 import com.gy.wyy.chat.ui.more.InputMoreFragment;
-import com.gy.wyy.chat.ui.tool.AudioPlayer;
-import com.gy.wyy.chat.ui.tool.ChatUiLog;
 import com.gy.wyy.chat.ui.voice.VoiceFragment;
 
 import java.util.regex.Matcher;
@@ -121,6 +119,7 @@ public class InputLayout extends LinearLayout implements View.OnClickListener, T
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.message_input_audio) {
+            hindEmojiFragment();
             if (!mVoiceDisable){
                 showAudioInput();
             }else {
@@ -132,9 +131,11 @@ public class InputLayout extends LinearLayout implements View.OnClickListener, T
                 mMoreDisable = false;
                 mMoreLayout.setVisibility(View.GONE);
             }else {
+                hindEmojiFragment();
                 showInputMoreFragment();
             }
         } else if (id == R.id.message_input_face) {
+            hindEmojiFragment();
             if (mFaceDisable){
                 hindFaceFragment();
                 showInput();

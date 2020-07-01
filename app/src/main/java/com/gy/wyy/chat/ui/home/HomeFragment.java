@@ -1,5 +1,6 @@
 package com.gy.wyy.chat.ui.home;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +19,7 @@ import com.gy.wyy.chat.ui.home.adapter.HomeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements HomeAdapter.OnHomeAdapterListener {
 
     private View rootView;
     private HomeViewModel homeViewModel;
@@ -49,7 +50,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        homeAdapter = new HomeAdapter(getContext(),dataSource);
+        homeAdapter = new HomeAdapter(getContext(),dataSource,this);
         recyclerView.setAdapter(homeAdapter);
 
         dataSource.add("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=111713540,615806613&fm=26&gp=0.jpg");
@@ -67,5 +68,10 @@ public class HomeFragment extends Fragment {
         homeViewModel.getLiveData().observe(getViewLifecycleOwner(), s -> {
             text_home.setText(s);
         });*/
+    }
+
+    @Override
+    public void onListener(int position, String data) {
+        startActivity(new Intent(getActivity(),HomeDetailActivity.class));
     }
 }

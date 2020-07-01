@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VideoLayout">
+        <!--是否加载视频缩略图-->
+        <attr name="thumbnail" format="boolean"/>
+        <!--循环播放-->
+        <attr name="loop" format="boolean"/>
+        <!--加载完成自动播放-->
+        <attr name="autoPlayer" format="boolean"/>
+        <!--是否静音-->
+        <attr name="silence" format="boolean"/>
+    </declare-styleable>
+</resources>
