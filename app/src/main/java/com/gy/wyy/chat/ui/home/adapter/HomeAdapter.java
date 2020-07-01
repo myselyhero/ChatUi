@@ -21,10 +21,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
 
     private Context mContext;
     private List<String> dataSource;
+    private OnHomeAdapterListener listener;
 
-    public HomeAdapter(Context context,List<String> list){
+    public HomeAdapter(Context context,List<String> list,OnHomeAdapterListener listener){
         mContext = context;
         dataSource = list;
+        this.listener = listener;
     }
 
     @NonNull
@@ -37,6 +39,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
     @Override
     public void onBindViewHolder(@NonNull HomeAdapterViewHolder holder, int position) {
         GlideEngine.loader(dataSource.get(position),holder.imageView);
+        holder.itemView.setOnClickListener(v -> {
+            listener.onListener(position,dataSource.get(position));
+        });
     }
 
     @Override
@@ -52,5 +57,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
             super(itemView);
             imageView = itemView.findViewById(R.id.fragment_home_item_iv);
         }
+    }
+
+    /**
+     *
+     */
+    public interface OnHomeAdapterListener {
+
+        /**
+         *
+         * @param position
+         * @param data
+         */
+        void onListener(int position,String data);
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@drawable/video_speed_layout_background"
+    android:id="@+id/video_status_layout">
+    <ImageView
+        android:id="@+id/video_speed_layout_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"/>
+    <TextView
+        android:id="@+id/video_speed_layout_tv"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size14"
+        android:textColor="@color/white"/>
+</LinearLayout>
