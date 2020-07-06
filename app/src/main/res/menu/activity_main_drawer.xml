@@ -18,12 +18,17 @@
 
         <!--ic_menu_gallery-->
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_map"
             android:icon="@drawable/ic_map"
             android:title="@string/menu_map" />
+
+        <item
+            android:id="@+id/nav_photo"
+            android:icon="@drawable/ic_photo"
+            android:title="@string/menu_photo" />
         <!--ic_menu_slideshow-->
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_video"
             android:icon="@drawable/ic_video"
             android:title="@string/menu_video" />
     </group>
