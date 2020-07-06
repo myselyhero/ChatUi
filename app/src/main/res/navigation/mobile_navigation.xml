@@ -18,13 +18,19 @@
         tools:layout="@layout/fragment_message" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_map"
         android:name="com.gy.wyy.chat.ui.map.mapFragment"
         android:label="@string/menu_map"
         tools:layout="@layout/fragment_map" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_photo"
+        android:name="com.gy.wyy.chat.ui.photo.PhotoFragment"
+        android:label="@string/menu_photo"
+        tools:layout="@layout/fragment_photo" />
+
+    <fragment
+        android:id="@+id/nav_video"
         android:name="com.gy.wyy.chat.ui.video.VideoFragment"
         android:label="@string/menu_video"
         tools:layout="@layout/fragment_video" />
