@@ -27,7 +27,7 @@ public class GlideEngine {
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.default_profile)
                         .error(R.drawable.default_profile)
-                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .bitmapTransform(new CircleCrop()))
                 .into(imageView);
     }
@@ -44,7 +44,7 @@ public class GlideEngine {
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.default_image)
                         .error(R.drawable.default_error)
-                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .bitmapTransform(new CornerTransform(UiKit.getAppContext(),size)))
                 .into(imageView);
     }
@@ -59,7 +59,7 @@ public class GlideEngine {
         Glide.with(UiKit.getAppContext())
                 .load(resId)
                 .apply(new RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .bitmapTransform(new CornerTransform(UiKit.getAppContext(),size)))
                 .into(imageView);
     }
@@ -75,7 +75,7 @@ public class GlideEngine {
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.default_image)
                         .error(R.drawable.default_error)
-                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(imageView);
     }
 }
