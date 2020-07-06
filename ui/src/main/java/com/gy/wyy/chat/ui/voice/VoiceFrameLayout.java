@@ -150,7 +150,7 @@ public class VoiceFrameLayout extends LinearLayout {
                             clearAnimation();
                             mCancelExecuteAnimation = true;
                             cancelButton.startAnimation(amplificationAnimation);
-                            cancelButton.setBackground(getResources().getDrawable(R.drawable.voice_button_blue));
+                            cancelButton.setBackground(getResources().getDrawable(R.drawable.voice_button_red));
                             cancelButton.setImageResource(R.drawable.ic_voice_delete_white);
                         } else if (motionEvent.getY() - mStartY > minMove && (Math.abs(motionEvent.getY() - mStartY) > minMove)) {
                             //向下

@@ -14,6 +14,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -71,6 +72,10 @@ public class VideoLayoutUi extends LinearLayout {
      */
     private Timer topTimer;
     private Timer bottomTimer;
+    /**
+     * 用于计时销毁控制器
+     */
+    private Timer destroyTimer;
 
     /**
      *
@@ -169,13 +174,52 @@ public class VideoLayoutUi extends LinearLayout {
         }
     }
 
+    /**
+     * 显示控制器
+     */
+    protected void initController(){
+        if (bottomBackground.getVisibility() == View.GONE){
+            bottomBackground.setVisibility(View.VISIBLE);
+            if (isFullScreen){
+                topBackground.setVisibility(View.VISIBLE);
+            }
+            startTimer();
+            /*destroyTimer = new Timer();
+            destroyTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    post(new Runnable() {
+                        @Override
+                        public void run() {
+                            hindController();
+                        }
+                    });
+                }
+            }, 0, 3000);*/
+        }else {
+            hindController();
+        }
+    }
+
+    /**
+     * 隐藏控制器
+     */
+    protected void hindController(){
+        if (bottomBackground.getVisibility() == View.VISIBLE){
+            bottomBackground.setVisibility(View.GONE);
+        }
+        if (topBackground.getVisibility() == View.VISIBLE){
+            topBackground.setVisibility(View.GONE);
+        }
+        destroyTimer();
+    }
 
     /**
      *
      */
     protected void startTimer(){
         /* 顶部控制器需在全屏时显示，为了测试暂时放开 */
-        if (topTimer == null){
+        if (topTimer == null && isFullScreen){
             topTimer = new Timer();
             topTimer.schedule(new TimerTask() {
                 @Override

@@ -87,6 +87,7 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
     /**
      * 权限弹窗
      */
+    private boolean mAlertDialogShow = false;
     private AlertDialog.Builder mAlertDialog;
 
     /**
@@ -146,7 +147,7 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
      *
      */
     public void onPause(){
-        destroyTimer();
+        hindController();
         PlayerManager.getInstance().stop();
     }
 
@@ -154,7 +155,7 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
      *
      */
     public void onResume(){
-        startTimer();
+        initController();
         PlayerManager.getInstance().start();
     }
 
@@ -163,7 +164,7 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
      */
     public void onDestroy(){
         PlayerManager.getInstance().release();
-        destroyTimer();
+        hindController();
         unRegister();
     }
 
@@ -223,13 +224,14 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
         // 设置总长度、时长
         bottomSeekBar.setMax(mediaPlayer.getDuration());
 
+        initController();
+
         if (isAutoPlayer){
             if (isThumbnail && mThumbnailImageVew.getVisibility() == View.VISIBLE){
                 mThumbnailImageVew.setVisibility(View.GONE);
             }
             mStatusLayout.ok();
             PlayerManager.getInstance().start();
-            startTimer();
         }else {
             mStatusLayout.stop();
         }
@@ -331,16 +333,26 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        if ((System.currentTimeMillis() - oldClickTime) < 1000){
+        if ((System.currentTimeMillis() - oldClickTime) < 10000){
             oldClickTime = System.currentTimeMillis();
-            Log.e(TAG, "onSingleTapUp: 双击");
+            if (PlayerManager.getInstance().isPlayer()){
+                PlayerManager.getInstance().stop();
+                mStatusLayout.stop();
+            }else {
+                if (PlayerManager.getInstance().isMediaPlayer()){
+                    PlayerManager.getInstance().start();
+                    mStatusLayout.ok();
+                }
+            }
+        }else {
+            initController();
         }
         return false;
     }
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        if (mStatusLayout.getStatusEnum() != VideoStatusLayout.VideoStatusEnum.OK){
+        if (mStatusLayout.getStatusEnum() != VideoStatusLayout.VideoStatusEnum.OK || isFullScreen){
             return false;
         }
         if (Math.abs(distanceX) >= Math.abs(distanceY)){
@@ -355,7 +367,7 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
             try {
                 if (Math.abs(distanceX) > Math.abs(distanceY)) {// 横向移动大于纵向移动
                     int position = PlayerManager.getInstance().getCurrentPosition();
-                    if (distanceX >= ScreenUtil.dip2px(getContext(),6f)) {// 快退，用步长控制改变速度，可微调
+                    if (distanceX >= ScreenUtil.dip2px(getContext(),8f)) {// 快退，用步长控制改变速度，可微调
                         isSpeed = false;
                         if (position > 0){
                             if (position > 3 * 1000) {// 避免为负
@@ -366,7 +378,7 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
                             }
                             PlayerManager.getInstance().seekTo(position);
                         }
-                    } else if (distanceX <= (-ScreenUtil.dip2px(getContext(),6f))) {// 快进
+                    } else if (distanceX <= (-ScreenUtil.dip2px(getContext(),8f))) {// 快进
                         isSpeed = true;
                         if (position > 0){
                             if (position < PlayerManager.getInstance().getDuration() - 5 * 1000) {// 避免超过总时长
@@ -411,19 +423,22 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
                 isMute(currentVolume);
             } else {//起始点在左边
                 if (!checkPermission()){
-                    if (mAlertDialog == null) {
+                    if (mAlertDialog == null && !mAlertDialogShow) {
+                        mAlertDialogShow = true;
                         mAlertDialog = new AlertDialog.Builder(getContext());
                         mAlertDialog.setTitle("提示");
                         mAlertDialog.setMessage("视频播放调节亮度需要申请权限");
                         mAlertDialog.setNegativeButton("关闭", null);
-                        mAlertDialog.setPositiveButton("去开启", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:" + getContext().getPackageName()));
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                ((Activity) getContext()).startActivityForResult(intent, VIDEO_LAYOUT_LUMINANCE_PERMISSION_REQUEST_CODE);
-                            }
+                        mAlertDialog.setPositiveButton("去开启",(dialog, which) -> {
+                            Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:" + getContext().getPackageName()));
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            ((Activity) getContext()).startActivityForResult(intent, VIDEO_LAYOUT_LUMINANCE_PERMISSION_REQUEST_CODE);
+                        }).setOnDismissListener(dialog -> {
+                            mAlertDialogShow = false;
                         }).show();
+                    }else if (!mAlertDialogShow){
+                        mAlertDialogShow = true;
+                        mAlertDialog.show();
                     }
                     return false;
                 }
@@ -466,19 +481,17 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        if (mVideoVolumeAndLuminanceLayout.getVisibility() == View.VISIBLE){
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (mVideoVolumeAndLuminanceLayout.getVisibility() == View.VISIBLE){
-                        mVideoVolumeAndLuminanceLayout.ok();
-                    }
-                    if (mSpeedLayout.getVisibility() == View.VISIBLE){
-                        mSpeedLayout.setVisibility(View.GONE);
-                    }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mVideoVolumeAndLuminanceLayout.getVisibility() == View.VISIBLE){
+                    mVideoVolumeAndLuminanceLayout.ok();
                 }
-            },500);
-        }
+                if (mSpeedLayout.getVisibility() == View.VISIBLE){
+                    mSpeedLayout.setVisibility(View.GONE);
+                }
+            }
+        },500);
         return false;
     }
 

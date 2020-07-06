@@ -21,6 +21,30 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.home.HomeDetailActivity"/>
+
+        <!-- 地图 -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="mhYukZogPrtdZdmG90EE0df2AeWs9wH5" />
+
+        <service android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/>
     </application>
 
+    <!-- 读写 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!-- 获取网络状态，根据网络状态切换进行数据请求网络转换 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于app后台定位，适配android 10 -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <!--android 9-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION " />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 </manifest>
