@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MultimediaSelectedView">
+        <attr name="maxNum" format="integer"/>
+        <attr name="spanCount" format="integer"/>
+        <attr name="add" format="boolean"/>
+        <attr name="defaultImage" format="reference"/>
+        <attr name="deleteImage" format="reference"/>
+    </declare-styleable>
+</resources>

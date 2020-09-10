@@ -299,7 +299,7 @@ public class VideoLayoutUi extends LinearLayout {
      */
     protected void register(){
         //&& isFullScreen
-        if (batteryReceiver == null){
+        if (batteryReceiver == null && isFullScreen){
             IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
             batteryReceiver = new BatteryBoradcasReceiver();
             getContext().registerReceiver(batteryReceiver, intentFilter);
@@ -375,12 +375,13 @@ public class VideoLayoutUi extends LinearLayout {
             //
             ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
-            if (NetworkInfo.State.CONNECTED == netInfo.getState()) {
+            if (netInfo != null && NetworkInfo.State.CONNECTED == netInfo.getState()) {
                 if (netInfo.getType() == ConnectivityManager.TYPE_WIFI) { //WiFi网络
                 } else if (netInfo.getType() == ConnectivityManager.TYPE_MOBILE) {   //3g网络
                 } else {//其他
                 }
             } else {//断开
+
             }
         }
     }

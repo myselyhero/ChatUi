@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gy.wyy.chat.ui.model.MessageLayoutInterface;
 import com.gy.wyy.chat.ui.model.OnMessageLayoutItemClickListener;
 
 /**

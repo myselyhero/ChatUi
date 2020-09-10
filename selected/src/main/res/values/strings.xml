@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">selected</string>
+
+    <string name="multimedia_selected_folder_all">图片/视频</string>
+
+    <string name="multimedia_selected_top_confirm">确定</string>
+    <string name="multimedia_selected_top_send">发送</string>
+
+    <string name="multimedia_selected_bottom_original">原图</string>
+    <string name="multimedia_selected_bottom_preview">预览</string>
+</resources>

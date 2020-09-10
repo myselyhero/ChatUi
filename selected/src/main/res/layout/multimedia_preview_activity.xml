@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+    <RelativeLayout
+        android:id="@+id/multimedia_preview_activity_top"
+        android:background="@color/multimedia_selected_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/multimedia_selected_top">
+        <LinearLayout
+            android:id="@+id/multimedia_preview_activity_close"
+            android:gravity="center"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/multimedia_top_left_white"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/multimedia_preview_activity_index"
+            android:layout_toEndOf="@id/multimedia_preview_activity_close"
+            android:layout_centerVertical="true"
+            android:background="@drawable/multimedia_top_right_background"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:text="1/17"/>
+
+        <Button
+            android:id="@+id/multimedia_selected_top_layout_button"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:minWidth="60dp"
+            android:layout_height="35dp"
+            android:background="@drawable/multimedia_top_right_background"
+            android:text="@string/multimedia_selected_top_confirm"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </RelativeLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/multimedia_preview_activity_pager"
+        android:layout_above="@id/multimedia_preview_activity_bottom"
+        android:layout_below="@id/multimedia_preview_activity_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:id="@+id/multimedia_preview_activity_bottom"
+        android:layout_alignParentBottom="true"
+        android:background="@color/multimedia_selected_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/multimedia_selected_bottom">
+        <CheckBox
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/multimedia_selected_bottom_original"
+            android:paddingLeft="3dp"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:text="@string/multimedia_selected_bottom_original"/>
+
+        <CheckBox
+            android:visibility="gone"
+            android:id="@+id/multimedia_preview_activity_checked"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="3dp"
+            android:button="@drawable/multimedia_selected_bottom_original"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:text="选择" />
+
+        <LinearLayout
+            android:id="@+id/multimedia_preview_activity_checked_background"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:minWidth="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/multimedia_preview_activity_checked_background_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/multimedia_selected_bottom_original_un"/>
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:text="选择"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

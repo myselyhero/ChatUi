@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             if (num > 0){
-                ToastUtil.toastShort("有"+num+"项权限未授予，部分功能无法使用！");
+                ChatUiLog.e(MainActivity.class.getSimpleName(),"有"+num+"项权限未授予，部分功能无法使用！");
+                //ToastUtil.toastShort("有"+num+"项权限未授予，部分功能无法使用！");
             }else {
                 //ToastUtil.toastShort("授权成功！");
             }

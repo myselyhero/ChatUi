@@ -21,7 +21,7 @@ public class VideoFragment extends Fragment {
         //slideshowViewModel = ViewModelProviders.of(this).get(SlideshowViewModel.class);
         View root = inflater.inflate(R.layout.fragment_video, container, false);
         videoLayout = root.findViewById(R.id.video_layout);
-        videoLayout.initPlayer("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4","小熊");
+        videoLayout.initPlayer("http://116.62.110.155:8081/static/video/鹤谷物流.mp4","小熊");
         /*final TextView textView = root.findViewById(R.id.text_slideshow);
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

@@ -5,19 +5,24 @@ import android.content.Context;
 import com.gy.wyy.chat.ui.face.FaceManager;
 import com.gy.wyy.chat.ui.tool.FileUtil;
 
+import java.lang.ref.WeakReference;
+
 /**
  *
  */
 public class UiKit {
 
-    private static Context mAppContext;
+    /**
+     * 全局上下文
+     */
+    private static WeakReference<Context> mAppContext;
 
     /**
      *
      * @param context
      */
     public static void initKit(Context context){
-        mAppContext = context;
+        mAppContext = new WeakReference<>(context);
         FileUtil.initPath();
         FaceManager.loadFaceFiles();
     }
@@ -27,6 +32,6 @@ public class UiKit {
      * @return
      */
     public static Context getAppContext(){
-        return mAppContext;
+        return mAppContext.get();
     }
 }

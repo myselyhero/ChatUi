@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/multimedia_selected_top"
+    android:background="@color/multimedia_selected_top">
+    <LinearLayout
+        android:id="@+id/multimedia_selected_top_layout_close"
+        android:gravity="center"
+        android:layout_width="40dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/multimedia_selected_top_layout_close_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/multimedia_top_left_white"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/multimedia_selected_top_layout_folder"
+        android:layout_toEndOf="@id/multimedia_selected_top_layout_close"
+        android:layout_centerVertical="true"
+        android:background="@drawable/multimedia_selected_top_folder_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/multimedia_selected_top_layout_folder_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="40dp"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:text="全部"/>
+        <ImageView
+            android:id="@+id/multimedia_selected_top_layout_folder_iv"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/multimedia_selected_top_down"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/multimedia_selected_top_layout_button"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:minWidth="60dp"
+        android:layout_height="35dp"
+        android:background="@drawable/multimedia_top_right_background"
+        android:text="@string/multimedia_selected_top_confirm"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+</RelativeLayout>

@@ -6,37 +6,83 @@ import java.util.UUID;
 /**
  *
  */
-public class MessageEntity implements Serializable {
+public class MessageEntity implements Serializable, Comparable<MessageEntity> {
 
     /**
      * 消息類型
      */
-    public static final int MESSAGE_ENTITY_TEXT = 101;
-    public static final int MESSAGE_ENTITY_IMAGE = 102;//图片
 
     /**
-     * 正常状态
+     * 文本
      */
-    public static final int MESSAGE_STATUS_NORMAL = 0;
+    public static final int MESSAGE_ENTITY_TEXT = 101;
+
     /**
-     * 发送中状态
+     * 图片
      */
-    public static final int MESSAGE_STATUS_SENDING = 1;
+    public static final int MESSAGE_ENTITY_IMAGE = 102;
+
     /**
-     * 发送成功状态
+     * 视频
      */
-    public static final int MESSAGE_STATUS_SEND_SUCCESS = 2;
+    public static final int MESSAGE_ENTITY_VIDEO = 103;
+
     /**
-     * 发送失败状态
+     * 语音
      */
-    public static final int MESSAGE_STATUS_SEND_FAIL = 3;
+    public static final int MESSAGE_ENTITY_AUDIO = 104;
+
+    /**
+     * 位置
+     */
+    public static final int MESSAGE_ENTITY_LOCATION= 105;
+
+    /**
+     * 红包
+     */
+    public static final int MESSAGE_ENTITY_PACKAGE = 106;
+
+    /**
+     * 转账
+     */
+    public static final int MESSAGE_ENTITY_TRANSFER = 107;
+
+    /**
+     * 文件
+     */
+    public static final int MESSAGE_ENTITY_FILE = 108;
+
+    /**
+     * 收藏
+     */
+    public static final int MESSAGE_ENTITY_COLLECT = 109;
+
+    /**
+     * 语音通话
+     */
+    public static final int MESSAGE_ENTITY_AUDIO_CALL = 110;
+
+    /**
+     * 视频通话
+     */
+    public static final int MESSAGE_ENTITY_VIDEO_CALL = 111;
+
+    /**
+     * 提示
+     */
+    public static final int MESSAGE_ENTITY_VIDEO_TIPS = 112;
 
     private String id = UUID.randomUUID().toString();
+
+    /* 消息发送者 */
     private String formUser;
+
+    /* 消息类型 */
     private int msgType = MESSAGE_ENTITY_TEXT;
-    private int status = MESSAGE_STATUS_NORMAL;
+    private MessageStatus status = MessageStatus.NORMAL;
     private boolean self;
     private long msgTime = System.currentTimeMillis();
+
     private String text;
     private String dataPath;
 
@@ -60,11 +106,11 @@ public class MessageEntity implements Serializable {
         this.msgType = msgType;
     }
 
-    public int getStatus() {
+    public MessageStatus getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(MessageStatus status) {
         this.status = status;
     }
 
@@ -112,5 +158,10 @@ public class MessageEntity implements Serializable {
                 ", text='" + text + '\'' +
                 ", dataPath='" + dataPath + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(MessageEntity o) {
+        return 0;
     }
 }

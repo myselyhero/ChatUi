@@ -54,12 +54,16 @@ public class InputMoreFragment extends Fragment {
         viewPager = view.findViewById(R.id.input_more_view_pager);
         emojiIndicatorView = view.findViewById(R.id.input_more_view_index);
         List<InputMoreEntity> list = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            InputMoreEntity entity = new InputMoreEntity();
-            entity.setResourceId(R.drawable.default_image);
-            entity.setTitle("测试"+i);
-            list.add(entity);
-        }
+
+        list.add(new InputMoreEntity(R.drawable.ic_message_input_more_camera,getString(R.string.message_input_more_camera)));
+        list.add(new InputMoreEntity(R.drawable.ic_message_input_more_photo,getString(R.string.message_input_more_photo)));
+        list.add(new InputMoreEntity(R.drawable.ic_message_input_more_audio_call,getString(R.string.message_input_more_audio_call)));
+        list.add(new InputMoreEntity(R.drawable.ic_message_input_more_video_call,getString(R.string.message_input_more_video_call)));
+        list.add(new InputMoreEntity(R.drawable.ic_message_input_more_package,getString(R.string.message_input_more_package)));
+        list.add(new InputMoreEntity(R.drawable.ic_message_input_more_transfer,getString(R.string.message_input_more_transfer)));
+        list.add(new InputMoreEntity(R.drawable.ic_message_input_more_location,getString(R.string.message_input_more_location)));
+        list.add(new InputMoreEntity(R.drawable.ic_message_input_more_collect,getString(R.string.message_input_more_collect)));
+        list.add(new InputMoreEntity(R.drawable.ic_message_input_more_file,getString(R.string.message_input_more_file)));
 
         int pageCont = getPagerCount(list);
         emojiIndicatorView.init(pageCont);
@@ -114,8 +118,8 @@ public class InputMoreFragment extends Fragment {
         GridView gridview = layout.findViewById(R.id.input_more_grid);
 
         final List<InputMoreEntity> subList = new ArrayList<>();
-        int dit = 1;
-        subList.addAll(list.subList(position * (columnsDefault * rowsDefault - dit),
+        //int dit = 1;
+        subList.addAll(list.subList(position * (columnsDefault * rowsDefault),//- dit
                 (columnsDefault * rowsDefault) * (position + 1) > list
                         .size() ? list.size() : (columnsDefault * rowsDefault) * (position + 1)));
 

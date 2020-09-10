@@ -50,6 +50,7 @@ dependencies {
 
     implementation files('libs/BaiduLBS_Android.jar')
 
+    implementation project(path: ':selected')
     implementation project(path: ':ui')
     implementation project(path: ':player')
 }

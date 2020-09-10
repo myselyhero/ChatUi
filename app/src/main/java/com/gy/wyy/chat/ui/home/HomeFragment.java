@@ -24,7 +24,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.OnHomeAdapterL
     private View rootView;
     private HomeViewModel homeViewModel;
 
-    private List<String> dataSource = new ArrayList<>();
+    private List<HomeEntity> dataSource = new ArrayList<>();
     private RecyclerView recyclerView;
     private HomeAdapter homeAdapter;
 
@@ -53,7 +53,37 @@ public class HomeFragment extends Fragment implements HomeAdapter.OnHomeAdapterL
         homeAdapter = new HomeAdapter(getContext(),dataSource,this);
         recyclerView.setAdapter(homeAdapter);
 
-        dataSource.add("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=111713540,615806613&fm=26&gp=0.jpg");
+        for (int i = 0; i < 15; i++) {
+            if (i % 2 != 0){
+                switch (i){
+                    case 1:
+                        dataSource.add(new HomeEntity("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=111713540,615806613&fm=26&gp=0.jpg",HomeEntity.HOME_HOLDER_IMAGE));
+                        break;
+                    case 3:
+                        dataSource.add(new HomeEntity("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746494233&di=7d69285ec30ee675446b0a9ac1e06e62&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201401%2F11%2F145825zn1sxa8anrg11gt1.jpg",HomeEntity.HOME_HOLDER_IMAGE));
+                        break;
+                    case 5:
+                        dataSource.add(new HomeEntity("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746494229&di=44c11b56415df7d72c43719ee8fee245&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201702%2F24%2F082111tt8ih6o4hiib657c.jpg",HomeEntity.HOME_HOLDER_IMAGE));
+                        break;
+                    case 7:
+                        dataSource.add(new HomeEntity("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746494264&di=f270709cd06289c92f81fbf9b4913a6d&imgtype=0&src=http%3A%2F%2F2b.zol-img.com.cn%2Fproduct%2F61_940x705%2F83%2Fce9MEqItt60go.jpg",HomeEntity.HOME_HOLDER_IMAGE));
+                        break;
+                    case 9:
+                        dataSource.add(new HomeEntity("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746494264&di=33536bbfa36b2baab3d26184b31de434&imgtype=0&src=http%3A%2F%2Fcdn.duitang.com%2Fuploads%2Fitem%2F201401%2F17%2F20140117221137_asMSK.jpeg",HomeEntity.HOME_HOLDER_IMAGE));
+                        break;
+                    case 11:
+                        dataSource.add(new HomeEntity("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746624786&di=b6144477987d91041d2dc4780f99894e&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201408%2F06%2F123308ehtn3tyzt0thh1r9.jpg",HomeEntity.HOME_HOLDER_IMAGE));
+                        break;
+                    case 13:
+                        dataSource.add(new HomeEntity("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746866882&di=2ec357bec586096c1ca56356cd9ad1ae&imgtype=0&src=http%3A%2F%2Fimg.qqzhi.com%2Fuploads%2F2018-12-11%2F234321839.jpg",HomeEntity.HOME_HOLDER_IMAGE));
+                        break;
+                }
+            }else {
+                dataSource.add(new HomeEntity("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4",HomeEntity.HOME_HOLDER_VIDEO));
+            }
+        }
+
+        /*dataSource.add("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=111713540,615806613&fm=26&gp=0.jpg");
         dataSource.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746494233&di=7d69285ec30ee675446b0a9ac1e06e62&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201401%2F11%2F145825zn1sxa8anrg11gt1.jpg");
         dataSource.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746494229&di=44c11b56415df7d72c43719ee8fee245&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201702%2F24%2F082111tt8ih6o4hiib657c.jpg");
         dataSource.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746494264&di=f270709cd06289c92f81fbf9b4913a6d&imgtype=0&src=http%3A%2F%2F2b.zol-img.com.cn%2Fproduct%2F61_940x705%2F83%2Fce9MEqItt60go.jpg");
@@ -61,7 +91,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.OnHomeAdapterL
         dataSource.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746624786&di=b6144477987d91041d2dc4780f99894e&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201408%2F06%2F123308ehtn3tyzt0thh1r9.jpg");
         dataSource.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746710462&di=9141a4d02f924b5e7a82bc34baad5c7b&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201503%2F20%2F2222226y6c4iij6io2ku66.jpg");
         dataSource.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746866882&di=2ec357bec586096c1ca56356cd9ad1ae&imgtype=0&src=http%3A%2F%2Fimg.qqzhi.com%2Fuploads%2F2018-12-11%2F234321839.jpg");
-        dataSource.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746894117&di=8431816d8cc09a878730aacc21345b16&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201502%2F01%2F20150201224516_diJYt.jpeg");
+        dataSource.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589746894117&di=8431816d8cc09a878730aacc21345b16&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201502%2F01%2F20150201224516_diJYt.jpeg");*/
         homeAdapter.notifyDataSetChanged();
 
         /*TextView text_home = rootView.findViewById(R.id.text_home);
@@ -71,7 +101,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.OnHomeAdapterL
     }
 
     @Override
-    public void onListener(int position, String data) {
+    public void onListener(int position, HomeEntity entity) {
         startActivity(new Intent(getActivity(),HomeDetailActivity.class));
     }
 }
