@@ -1,5 +1,7 @@
-package com.gy.wyy.chat.ui;
+package com.gy.wyy.chat.ui.model;
 
+import com.gy.wyy.chat.ui.MessageAdapter;
+import com.gy.wyy.chat.ui.MessageLayout;
 import com.gy.wyy.chat.ui.input.InputLayout;
 
 /**

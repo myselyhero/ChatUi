@@ -44,6 +44,7 @@ public class mapFragment extends Fragment implements BaiduMap.OnMapStatusChangeL
         mapView = contentView.findViewById(R.id.map_fragment_map_view);
         mBaiduMap = mapView.getMap();
 
+        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
         //开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
         //开启交通图

@@ -26,6 +26,14 @@ public class InputMoreEntity implements Serializable {
         this.title = title;
     }
 
+    public InputMoreEntity() {
+    }
+
+    public InputMoreEntity(int resourceId, String title) {
+        this.resourceId = resourceId;
+        this.title = title;
+    }
+
     @Override
     public String toString() {
         return "InputMoreEntity{" +

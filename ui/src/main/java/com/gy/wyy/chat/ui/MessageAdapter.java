@@ -161,21 +161,6 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     /**
      *
-     * @return
-     */
-    public List<String> getImageResource(){
-        if (mDataSource.size() == 0)
-            return null;
-        List<String> list = new ArrayList<>();
-        for (MessageEntity entity : mDataSource) {
-            if (entity.getMsgType() == MessageEntity.MESSAGE_ENTITY_IMAGE)
-                list.add(entity.getDataPath());
-        }
-        return list;
-    }
-
-    /**
-     *
      * @param type
      * @param value
      */

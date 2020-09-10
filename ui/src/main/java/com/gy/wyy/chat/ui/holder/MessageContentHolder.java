@@ -103,16 +103,16 @@ public abstract class MessageContentHolder extends MessageBaseViewHolder {
         //// 发送状态的设置
         if (msg.isSelf()){
             switch (msg.getStatus()){
-                case MessageEntity.MESSAGE_STATUS_NORMAL:
-                case MessageEntity.MESSAGE_STATUS_SEND_SUCCESS:
+                case NORMAL:
+                case SEND_SUCCESS:
                     statusImage.setVisibility(View.GONE);
                     sendingProgress.setVisibility(View.GONE);
                     break;
-                case MessageEntity.MESSAGE_STATUS_SENDING:
+                case SENDING:
                     statusImage.setVisibility(View.GONE);
                     sendingProgress.setVisibility(View.VISIBLE);
                     break;
-                case MessageEntity.MESSAGE_STATUS_SEND_FAIL:
+                case SEND_FAIL:
                     statusImage.setVisibility(View.VISIBLE);
                     sendingProgress.setVisibility(View.GONE);
                     statusImage.setOnClickListener(v -> {

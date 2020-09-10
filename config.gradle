@@ -10,6 +10,7 @@ ext {
 
     dependConfig = [
             glide                : "4.11.0",
-            recyclerView         : "1.1.0"
+            recyclerView         : "1.1.0",
+            gson                 : "2.8.5",
     ]
 }

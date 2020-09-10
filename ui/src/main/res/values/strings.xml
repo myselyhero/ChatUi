@@ -6,4 +6,14 @@
     <string name="voice_pressed">松开结束</string>
     <string name="voice_cancel">松开取消</string>
     <string name="voice_translate">松开转文字</string>
+
+    <string name="message_input_more_video_call">视频通话</string>
+    <string name="message_input_more_audio_call">语音通话</string>
+    <string name="message_input_more_camera">拍摄</string>
+    <string name="message_input_more_collect">收藏</string>
+    <string name="message_input_more_file">文件</string>
+    <string name="message_input_more_location">位置</string>
+    <string name="message_input_more_photo">相册</string>
+    <string name="message_input_more_package">红包</string>
+    <string name="message_input_more_transfer">转账</string>
 </resources>

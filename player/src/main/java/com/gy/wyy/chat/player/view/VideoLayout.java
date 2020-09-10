@@ -67,7 +67,6 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
     private boolean isAutoPlayer;
 
 
-
     /**
      * 是否静音,标识是否显示静音/音量按钮
      */
@@ -94,6 +93,8 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
      * 上传一次点击时间
      */
     private long oldClickTime;
+
+    private String dataSource;
 
     public VideoLayout(Context context) {
         super(context);
@@ -131,7 +132,12 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
         }
 
         currentVolume = PlayerManager.getInstance().getVolume();
-        isMute(currentVolume);
+
+        if (isSilence){
+            isMute(currentVolume);
+        }else {
+            bottomVoiceIcon.setVisibility(View.GONE);
+        }
 
         bottomSeekBar.setOnSeekBarChangeListener(this);
         mStatusLayout.setOnClickListener(this);
@@ -174,9 +180,14 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
      * @param title
      */
     public void initPlayer(String dataSource,String title){
-        if (TextUtils.isEmpty(dataSource)){
-            return;
+        this.dataSource = dataSource;
+        if (!TextUtils.isEmpty(title)){
+            topLeftGroupText.setVisibility(View.VISIBLE);
+            topLeftGroupText.setText(title);
+        }else {
+            topLeftGroupText.setVisibility(View.GONE);
         }
+
         if (isThumbnail){
             mThumbnailImageVew.setVisibility(View.VISIBLE);
             Glide.with(getContext()).load(dataSource)
@@ -187,15 +198,17 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
                     .into(mThumbnailImageVew);
         }
 
-        mStatusLayout.loader();
+        mStatusLayout.stop();
+    }
 
-        if (!TextUtils.isEmpty(title)){
-            topLeftGroupText.setVisibility(View.VISIBLE);
-            topLeftGroupText.setText(title);
-        }else {
-            topLeftGroupText.setVisibility(View.GONE);
+    /**
+     *
+     */
+    private void initPlayer(){
+        if (TextUtils.isEmpty(dataSource)){
+            return;
         }
-
+        mStatusLayout.loader();
         PlayerManager.getInstance().setManagerListener(this);
         mSurfaceHolder = mSurfaceView.getHolder();
         mSurfaceHolder.setFormat(PixelFormat.TRANSPARENT);
@@ -226,15 +239,11 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
 
         initController();
 
-        if (isAutoPlayer){
-            if (isThumbnail && mThumbnailImageVew.getVisibility() == View.VISIBLE){
-                mThumbnailImageVew.setVisibility(View.GONE);
-            }
-            mStatusLayout.ok();
-            PlayerManager.getInstance().start();
-        }else {
-            mStatusLayout.stop();
+        if (isThumbnail && mThumbnailImageVew.getVisibility() == View.VISIBLE){
+            mThumbnailImageVew.setVisibility(View.GONE);
         }
+        mStatusLayout.ok();
+        PlayerManager.getInstance().start();
     }
 
     @Override
@@ -272,6 +281,13 @@ public class VideoLayout extends VideoLayoutUi implements PlayerManagerListener,
         if (v.getId() == R.id.video_layout_status){
             switch (mStatusLayout.getStatusEnum()){
                 case STOP:
+                    if (PlayerManager.getInstance().isPlayer()){
+                        PlayerManager.getInstance().release();
+                    }
+                    if (PlayerManager.getInstance().isMediaPlayer()){
+                        initPlayer();
+                        return;
+                    }
                     mStatusLayout.ok();
                     if (isThumbnail && mThumbnailImageVew.getVisibility() == View.VISIBLE){
                         mThumbnailImageVew.setVisibility(View.GONE);

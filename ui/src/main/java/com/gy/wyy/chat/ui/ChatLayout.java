@@ -8,11 +8,13 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 import com.gy.wyy.chat.ui.input.InputLayout;
+import com.gy.wyy.chat.ui.model.ChatLayoutInterface;
+import com.gy.wyy.chat.ui.model.OnMessageCallBack;
 
 /**
  *
  */
-public class ChatLayout extends LinearLayout implements ChatLayoutInterface {
+public class ChatLayout extends LinearLayout implements ChatLayoutInterface, OnMessageCallBack {
 
     private MessageLayout messageLayout;
     private InputLayout inputLayout;
@@ -45,6 +47,8 @@ public class ChatLayout extends LinearLayout implements ChatLayoutInterface {
         //
         messageAdapter = new MessageAdapter(getContext());
         messageLayout.setAdapter(messageAdapter);
+
+        MessageManagerKit.getInstance().get(this);
     }
 
     @Override
@@ -65,5 +69,15 @@ public class ChatLayout extends LinearLayout implements ChatLayoutInterface {
     @Override
     public InputLayout getInputLayout() {
         return inputLayout;
+    }
+
+    @Override
+    public void onSuccess(Object object) {
+
+    }
+
+    @Override
+    public void onError(int code) {
+
     }
 }

@@ -9,9 +9,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
-        <item name="android:fitsSystemWindows">false</item>
+        <!--<item name="android:fitsSystemWindows">false</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>-->
     </style>
 
     <style name="AppTheme.AppBarOverlay" paret="ThemeOverlay.AppCompat.Dark.ActionBar" />
